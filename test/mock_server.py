@@ -8,6 +8,14 @@ that never answers version requests, mid-session device-list pushes, and
 lowered protocol versions.
 """
 
+import sys
+
+# This file ships inside ~/.config/omarchy/plugins/<id>/, and a .pyc written
+# there is a non-hidden create the shell's plugin watcher treats as a code
+# change -- it reloads every plugin service, the lock service included
+# (basecamp/omarchy#7106). Set before the first local import.
+sys.dont_write_bytecode = True
+
 import socket
 import struct
 import threading

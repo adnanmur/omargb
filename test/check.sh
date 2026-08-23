@@ -4,6 +4,11 @@
 # logic probes. Exit 0 = pass.
 set -u
 
+# Tests live inside the installed plugin dir, and any .pyc written there is a
+# non-hidden create under ~/.config/omarchy/plugins -> the shell reloads every
+# plugin service, including the lock service (basecamp/omarchy#7106).
+export PYTHONDONTWRITEBYTECODE=1
+
 HERE=$(cd "$(dirname "$0")" && pwd)
 FAILED=0
 
